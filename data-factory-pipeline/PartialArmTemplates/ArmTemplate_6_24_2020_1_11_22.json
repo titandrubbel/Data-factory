@@ -1,0 +1,37 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "data-factory-pipeline"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureMLService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureMLService",
+				"typeProperties": {
+					"subscriptionId": "9e53675d-42f0-46ed-8e89-24629a9aeff2",
+					"resourceGroupName": "DF_pipeline",
+					"mlWorkspaceName": "DF_pipeline_workspace",
+					"servicePrincipalId": "910b2b66-da11-4e98-a342-699afc4d5b62",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "910b2b66-da11-4e98-a342-699afc4d5b62"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
